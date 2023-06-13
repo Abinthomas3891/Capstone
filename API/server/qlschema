@@ -1,36 +1,28 @@
 
 
-input Employee {
+input User{
  
- id:String,
+  id:String,
   FirstName: String
   LastName: String
-  Age: Int
-  DateOfJoining: String
-  Title:String 
-  Department: String
-  EmployeeType: String
-  CurrentStatus: Boolean
+  Phone: Int
+  Email: String
 }
-type EmployeeDetails {
+type UserDetails{
  
- id:String
+  id:String,
   FirstName: String
   LastName: String
-  Age: Int
-  DateOfJoining: String
-  Title:String
-  Department: String
-  EmployeeType: String
-  CurrentStatus: Boolean
+  Phone: Int
+  Email: String
 }
 type Query {
-  employeeDetails: [EmployeeDetails!]!
-  getSingleEmployee(id:String): EmployeeDetails
+  userDetails: [UserDetails!]!
+  getSingleUser(id:String): UserDetails
 }
 
 type Mutation {
-  addEmployeeDetails(employees: Employee!):EmployeeDetails
-  employeeDelete(id:String !): EmployeeDetails
-  updateEmployee(id: String!, employee: Employee!): EmployeeDetails
+  addUserDetails(users: User!):UserDetails
+  userDelete(id:String !): UserDetails
+  updateUser(id: String!, user: User!): UserDetails
 } 

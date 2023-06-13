@@ -1,0 +1,106 @@
+.footer {
+   
+    display: flex;
+    flex-direction: column;
+    padding:3rem 3rem;
+}
+.footerlinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2rem;
+
+}
+
+ .categories h4 {
+    display: flex;
+    width: 150px;
+    margin: 1rem;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: #000;
+    font-size: 20px;
+    line-height: 17px;
+}
+.categories a {
+    color: rgb(131 131 131);
+    text-decoration: none;
+}
+h3 {
+    color: #000;
+}
+.footerp {
+    color: rgb(131 131 131);
+}
+.categories p {
+    margin: 1rem;
+    font-size: 15px;
+    line-height: 14px;
+    cursor: pointer;
+   
+}
+hr {
+    color: rgb(125, 125, 128) !important
+    
+}
+.copyright-text {
+   color: rgb(131 131 131);
+}
+.qlinks h4 {
+    display: flex;
+    width: 150px;
+    margin: 1rem;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: #000;
+    font-size: 20px;
+    line-height: 17px;
+}
+.qlinks a {
+    color: rgb(131 131 131);
+    text-decoration: none;
+}
+.qlinks p {
+    margin: 1rem;
+    font-size: 15px;
+    line-height: 14px;
+    cursor: pointer;
+   
+}
+.popular h4 {
+    display: flex;
+    width: 150px;
+    margin: 1rem;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: #000;
+    font-size: 20px;
+    line-height: 17px;
+}
+.popular a {
+    color: rgb(131 131 131);
+    text-decoration: none;
+}
+.popular p {
+    margin: 1rem;
+    font-size: 15px;
+    line-height: 14px;
+    cursor: pointer;
+   
+}
+.socialmedia {
+    display: flex;
+    flex-direction: row;
+}
+.social {
+    width:25%;
+}
+.socialmedia img {
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+}

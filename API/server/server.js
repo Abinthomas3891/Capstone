@@ -3,48 +3,48 @@ const app = express();
 const fs = require("fs");
 const { ApolloServer } = require("apollo-server-express");
 const mongoDB = require("../mongoDb/db");
-const EmployeeDB = require("../mongoModel/employeDb");
+const UserDB = require("../mongoModel/userDb");
 const enableCors = (process.env.ENABLE_CORS || "true") == "true";
 
 app.use(express.static("./public"));
 
 const typdef_graphql = ``;
 
-const employeeDetails = async () => {
-  return EmployeeDB.find();
+const userDetails = async () => {
+  return UserDB.find();
 };
 
-const getSingleEmployee = async (_, { id }) => {
-  return EmployeeDB.findById(id);
+const getSingleUser = async (_, { id }) => {
+  return UserDB.findById(id);
 };
 
-const addEmployeeDetails = async (_, { employees }) => {
-  const addEmployeeDetail = new EmployeeDB(employees);
-  await addEmployeeDetail.save();
-  return addEmployeeDetail;
+const addUserDetails = async (_, { users }) => {
+  const addUserDetails = new UserDB(users);
+  await addUserDetails.save();
+  return addUserDetails;
 };
 
-const updateEmployee = async (_, { id, employee }) => {
-  const newEmp = await EmployeeDB.findByIdAndUpdate(id, employee, {
+const updateUser = async (_, { id, user }) => {
+  const newUser = await UserDB.findByIdAndUpdate(id, user, {
     new: true,
   });
-  return newEmp;
+  return newUser;
 };
 
-const employeeDelete = async (_, { id }) => {
-  const empDelete = await EmployeeDB.findByIdAndDelete(id);
-  return empDelete;
-};
+// const employeeDelete = async (_, { id }) => {
+//   const empDelete = await EmployeeDB.findByIdAndDelete(id);
+//   return empDelete;
+// };
 
 const resolvers = {
   Query: {
-    employeeDetails: employeeDetails,
-    getSingleEmployee: getSingleEmployee,
+    userDetails: userDetails,
+    getSingleUser: getSingleUser,
   },
   Mutation: {
-    addEmployeeDetails: addEmployeeDetails,
-    employeeDelete: employeeDelete,
-    updateEmployee: updateEmployee,
+    addUserDetails: addUserDetails,
+    // employeeDelete: employeeDelete,
+    updateUser: updateUser,
   },
 };
 

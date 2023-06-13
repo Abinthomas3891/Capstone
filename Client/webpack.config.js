@@ -13,6 +13,23 @@ module.exports = {
         test: /\.jsx?$/,
         use: "babel-loader",
       },
+      {
+        test: /\.[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i, 
+        loader: 'file-loader',
+        options: {
+          name: '/public/icons/[name].[ext]'
+        }
+      },
     ],
   },
 };
