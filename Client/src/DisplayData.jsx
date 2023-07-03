@@ -48,7 +48,7 @@ export default class dispUser extends React.Component {
         <div >
           <div >
             <h3 className="titlediv">
-              Employee Management System
+              display data
             </h3>
             <InsertTest
               displayUsrDetails={this.displayUsrDetails}
