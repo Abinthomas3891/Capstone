@@ -5,6 +5,9 @@ import About from './aboutus';
 import DisplayUser from "./DisplayData"
 import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, ApolloLink, InMemoryCache,createHttpLink } from "@apollo/client";
+import PostCreation from "./postCreation.jsx";
+import UserPosts from "./userPosts.jsx";
+import ProfileDetails from "./profileDetails.jsx";
 import { Routes, Route } from 'react-router-dom';
 
 const httpLink = createHttpLink({
@@ -21,10 +24,13 @@ const App = () => {
     <ApolloProvider client={client}>
       <Routes>
       <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contactus />} />
-      </Routes>
-    </ApolloProvider>
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contactus />} />
+      <Route path="/postCreation" element={<PostCreation />} />
+      <Route path="/userPosts" element={<UserPosts />} />
+      <Route path="/profileDetails" element={<ProfileDetails />} />
+     </Routes>
+     </ApolloProvider>
   );
 };
 
