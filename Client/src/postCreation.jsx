@@ -53,14 +53,108 @@ class PostCreation extends React.Component {
                   <FormLabel>Apartment Type</FormLabel>
                   <Form.Select defaultValue="Choose...">
                     <option>Choose...</option>
-                    <option>Studio</option>
-                    <option>1BHK</option>
-                    <option>2BHK</option>
-                    <option>3BHK</option>
-                    <option>4BHK</option>
-                    <option>5BHK</option>
+                    <option>House</option>
+                    <option>Town House</option>
+                    <option>Apartment</option>
+                    <option>Basement</option>
+                    <option>Villa</option>
+                    
                   </Form.Select>
                 </FormGroup>
+                <FormGroup className='mb-3'>
+                  <FormLabel id="bed-label">Bedroom</FormLabel>
+                  <div className='d-flex'>
+                    <Form.Check
+                      type="radio"
+                      id="bed-radio"
+                      label="1"
+                      value="1"
+                      name="bed"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="room-radio"
+                      label="2"
+                      value="2"
+                      name="bed"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="bedroom-radio"
+                      label="3"
+                      value="3"
+                      name="bed"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="bed"
+                      label="4"
+                      value="4"
+                      name="bed"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="bedroom"
+                      label="5"
+                      value="5"
+                      name="bed"
+                    />
+                    </div>
+                    </FormGroup>
+                    <FormGroup className='mb-3'>
+                  <FormLabel id="bath-label">Bathroom</FormLabel>
+                  <div className='d-flex'>
+                    <Form.Check
+                      type="radio"
+                      id="bath-radio"
+                      label="1"
+                      value="1"
+                      name="bed"
+                    />
+                     <Form.Check
+                      type="radio"
+                      id="radio"
+                      label="1.5"
+                      value="1.5"
+                      name="bed"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="bathroom-radio"
+                      label="2"
+                      value="2"
+                      name="bed"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="bedroom"
+                      label="3"
+                      value="3"
+                      name="bed"
+                    />
+                    
+                    </div>
+                    </FormGroup>
+                    
+                    <FormGroup className='mb-3'>
+                  <FormLabel id="parking-label">Parking</FormLabel>
+                  <div className='d-flex'>
+                    <Form.Check
+                      type="radio"
+                      id="parking-radio"
+                      label="Yes"
+                      value="Yes"
+                      name="parking"
+                    />
+                    <Form.Check
+                      type="radio"
+                      id="parking"
+                      label="No"
+                      value="No"
+                      name="parking"
+                    />
+                    </div>
+                    </FormGroup>
                 <FormGroup className='mb-3'>
                   <FormLabel id="location">Location</FormLabel>
                   <FormControl
