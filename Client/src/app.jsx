@@ -6,8 +6,6 @@ import Contactus from "./contact.jsx";
 import Home from "./home.jsx";
 import About from "./aboutus.jsx";
 import PostCreation from "./postCreation.jsx";
-import UserPosts from "./userPosts.jsx";
-import ProfileDetails from "./profileDetails.jsx";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -19,8 +17,7 @@ export default class App extends React.Component {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contactus />} />
         <Route path="/postCreation" element={<PostCreation />} />
-        <Route path="/userPosts" element={<UserPosts />} />
-        <Route path="/profileDetails" element={<ProfileDetails />} />
+        
         </Routes>
       </>
     );
