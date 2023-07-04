@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import Header from "./header.jsx";
 import Footer from "./footer.jsx";
-import './style.css';
+import './assets/css/style.css';
 
 
 class Contactus extends React.Component {
