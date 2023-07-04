@@ -8,6 +8,11 @@ import About from "./aboutus.jsx";
 import PostCreation from "./postCreation.jsx";
 //import UserPosts from "./userPosts.jsx";
 //import ProfileDetails from "./profileDetails.jsx";
+import Register from "./register.jsx";
+import Dashboard from "./dashboard.jsx";
+import Profile from "./profileDetails.jsx";
+import MyPosts from "./userPosts.jsx";
+import Login from "./login.jsx";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -19,8 +24,12 @@ export default class App extends React.Component {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contactus />} />
         <Route path="/postCreation" element={<PostCreation />} />
-        {/* <Route path="/userPosts" element={<UserPosts />} />
-        <Route path="/profileDetails" element={<ProfileDetails />} /> */}
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profileDetails" element={<Profile />} />
+        <Route path="/userPosts" element={<MyPosts />} />
+        <Route path="/login" element={<Login />} />
+        
         </Routes>
       </>
     );

@@ -8,6 +8,11 @@ import { ApolloClient, ApolloLink, InMemoryCache,createHttpLink } from "@apollo/
 import PostCreation from "./postCreation.jsx";
 // import UserPosts from "./userPosts.jsx";
 // import ProfileDetails from "./profileDetails.jsx";
+import Register from './register';
+import Dashboard from './dashboard';
+import Profile from './profileDetails';
+import MyPosts from './userPosts';
+import Login from './login';
 import { Routes, Route } from 'react-router-dom';
 
 const httpLink = createHttpLink({
@@ -19,6 +24,7 @@ const client = new ApolloClient({
   link: ApolloLink.from([httpLink]),
 });
 
+
 const App = () => {
   return (
     <ApolloProvider client={client}>
@@ -29,7 +35,12 @@ const App = () => {
       <Route path="/postCreation" element={<PostCreation />} />
       {/* <Route path="/userPosts" element={<UserPosts />} />
       <Route path="/profileDetails" element={<ProfileDetails />} /> */}
-     </Routes>
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/profileDetails" element={<Profile />} />
+      <Route path="/userPosts" element={<MyPosts />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
      </ApolloProvider>
   );
 };
