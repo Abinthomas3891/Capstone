@@ -1,10 +1,15 @@
 const mongoose=require("mongoose");
 
 const postsDB = mongoose.Schema({
-    Type: {type: String,},
-    BHK: {type: String,},
-    Description: {type: String},
-    Rent : {type: Number}
+    Title: {type: String},
+    Desc: {type: String},
+    price:{type: String},
+    Type: {type: String},
+    Bed: {type: String},
+    Bath: {type: String},
+    parking: {type: String},
+    Location : {type: String},
+    image : {type:String}
   });
   
   const PostDB = mongoose.model("postDB", postsDB);
