@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './home.css';
+import './assets/css/home.css';
 import { Button, Modal } from 'react-bootstrap';
 import Header from "./header.jsx";
 import Footer from "./footer.jsx";

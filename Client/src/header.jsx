@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
-import './header.css';
+import './assets/css/header.css';
 
 const Header = () => {
   return (
@@ -16,8 +16,8 @@ const Header = () => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-            <Nav.Link as={Link} to="/postCreation">Post Ad</Nav.Link>
-            <Nav.Link className="btn-login btn" href="#">
+            
+            <Nav.Link className="btn-login btn" href="/login">
               Login
             </Nav.Link>
           </Nav>

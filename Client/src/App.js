@@ -3,7 +3,13 @@ import Contactus from './contact';
 import Home from './home';
 import About from './aboutus';
 import PostCreation from "./postCreation.jsx";
+import Register from './register';
 import { Routes, Route } from 'react-router-dom';
+import Dashboard from './dashboard';
+import Profile from './profileDetails';
+import MyPosts from './userPosts';
+import Login from './login';
+
 const App = () => {
   return (
     <Routes>
@@ -11,6 +17,12 @@ const App = () => {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contactus />} />
       <Route path="/postCreation" element={<PostCreation />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/profileDetails" element={<Profile />} />
+      <Route path="/userPosts" element={<MyPosts />} />
+      <Route path="/login" element={<Login />} />
+      
         
     </Routes>
   );
