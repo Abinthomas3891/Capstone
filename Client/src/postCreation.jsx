@@ -1,10 +1,10 @@
 
+
 import React from 'react';
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
-import Header from "./header.jsx";
+import Header from "./userheader.jsx";
 import Footer from "./footer.jsx";
-import './postCreation.css';
-
+import './assets/css/style.css';
 
 class PostCreation extends React.Component {
   onSubmit = async(event) => {
@@ -92,18 +92,19 @@ class PostCreation extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <Header />
-        <div className='post-ad'>
-          <div className="post"></div>
-          <h1>Create a New Ad</h1>
-        </div>
-
-        <Container style={{ minHeight: '80vh' }}>
-          <Row className="justify-content-center">
-            <Col md={8} className='contact-form'>
+  return (
+    <>
+      <Header />
+      <div className='container-fluid bg-light p-5 create-post'>
+        <Container>
+         
+          <div className='card-view'>
+            <h4>Create your new property</h4>
+            <hr/>
+            
               <Form name="ad" onSubmit={this.onSubmit}>
+              <Row className="">
+                <Col md={6} className='contact-form'>
                 <FormGroup>
                   <FormLabel id="posttitle">Post Title</FormLabel>
                   <FormControl
@@ -111,7 +112,10 @@ class PostCreation extends React.Component {
                     name="PostTitle"
 
                   />
+                  
                 </FormGroup>
+                </Col>
+                <Col md={6} className='contact-form'>
                 <FormGroup className='mb-3'>
                   <FormLabel id="postdescription">Post description</FormLabel>
                   <FormControl
@@ -120,8 +124,10 @@ class PostCreation extends React.Component {
 
                   />
                 </FormGroup>
+                </Col>
+                <Col md={6} className='contact-form'>
                 <FormGroup className='mb-3'>
-                  <FormLabel id="price">price</FormLabel>
+                  <FormLabel id="price">Price</FormLabel>
                   <FormControl
                     type="number"
                     name="Price"
@@ -129,6 +135,8 @@ class PostCreation extends React.Component {
                   />
 
                 </FormGroup>
+                </Col>
+                <Col md={6} className='contact-form'>
                 <FormGroup as={Col} className='mb-3' controlId="formGridState">
                   <FormLabel>Apartment Type</FormLabel>
                   <FormControl name="PostType"></FormControl>
@@ -142,6 +150,8 @@ class PostCreation extends React.Component {
                     
                   </Form.Select>
                 </FormGroup>
+                </Col>
+                <Col md={4} className='contact-form'>
                 <FormGroup className='mb-3'>
                   <FormLabel id="bed-label">Bedroom</FormLabel>
                   <FormControl name="bed"></FormControl>
@@ -183,6 +193,8 @@ class PostCreation extends React.Component {
                     />
                     </div>
                     </FormGroup>
+                    </Col>
+                <Col md={4} className='contact-form'>
                     <FormGroup className='mb-3'>
                   <FormLabel id="bath-label">Bathroom</FormLabel>
                   <FormControl name="bath"></FormControl>
@@ -218,7 +230,8 @@ class PostCreation extends React.Component {
                     
                     </div>
                     </FormGroup>
-                    
+                    </Col>
+                <Col md={4} className='contact-form'>
                     <FormGroup className='mb-3'>
                   <FormLabel id="parking-label">Parking</FormLabel>
                   <FormControl name="park"></FormControl>
@@ -239,6 +252,8 @@ class PostCreation extends React.Component {
                     />
                     </div>
                     </FormGroup>
+                    </Col>
+                <Col md={6} className='contact-form'>
                 <FormGroup className='mb-3'>
                   <FormLabel id="location">Location</FormLabel>
                   <FormControl
@@ -247,36 +262,52 @@ class PostCreation extends React.Component {
 
                   />
                 </FormGroup>
+                </Col>
+                <Col md={6} className='contact-form'>
                 <Row className='mb-3'>
-                  <FormGroup as={Col}>
-
+                  <FormGroup className='col-md-9'>
+                  <FormLabel id="location">Upload Images</FormLabel>
                     <FormControl
                       type="file"
                       name="photos"
 
                     />
                   </FormGroup>
-                  <FormGroup as={Col}>
+                  <FormGroup className='col-md-3 upload-product'>
                     <Button className='primary-btn btn' type="submit">Upload</Button>
 
                   </FormGroup>
                 </Row>
+                </Col>
+                <Col md={12} className='contact-form d-flex justify-content-center post-submit'>
                 <Button className='primary-btn btn' type="submit">Add New Post</Button>
+                </Col>
+          </Row>
               </Form>
 
 
 
 
-            </Col>
-          </Row>
+            
+          </div>
+          
+
+         
+
         </Container>
-
-        <Footer />
       </div>
-    );
-  }
+      <Footer />
+    </>
+  );
+};
 }
-
-
-
 export default PostCreation
+
+
+
+
+
+
+
+
+
