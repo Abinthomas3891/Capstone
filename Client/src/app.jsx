@@ -6,6 +6,8 @@ import Contactus from "./contact.jsx";
 import Home from "./home.jsx";
 import About from "./aboutus.jsx";
 import PostCreation from "./postCreation.jsx";
+//import UserPosts from "./userPosts.jsx";
+//import ProfileDetails from "./profileDetails.jsx";
 import Register from "./register.jsx";
 import Dashboard from "./dashboard.jsx";
 import Profile from "./profileDetails.jsx";

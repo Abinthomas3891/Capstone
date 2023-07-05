@@ -3,7 +3,7 @@ const mongoose=require("mongoose");
 const userDB = mongoose.Schema({
     FirstName: {type: String,},
     LastName: {type: String,},
-    phone: {type: Number},
+    Phone: {type: Number},
     Email: {type: String}
 
   });

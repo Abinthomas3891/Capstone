@@ -1,0 +1,38 @@
+
+
+input Post{
+ 
+  Title:String,
+  Desc: String,
+  price: String,
+  Type: String,
+  Bed: String,
+  Bath: String,
+  parking: String,
+  Location:String,
+  image:String
+
+}
+type PostDetails{
+ 
+  id:String,
+  Title:String,
+  Desc: String,
+  price: String,
+  Type: String,
+  Bed: String,
+  Bath: String,
+  parking: String,
+  Location:String,
+  image:String
+}
+type Query {
+  postDetails: [PostDetails!]!
+  getSinglePost(id:String): PostDetails
+}
+
+type Mutation {
+  addPostDetails(posts: Post!):PostDetails
+  PostDelete(id:String !): PostDetails
+  updatePost(id: String!, post: Post!): PostDetails
+} 

@@ -1,5 +1,5 @@
 import InsertTest from "./insertTest.jsx";
-
+import React from 'react';
 export default class dispUser extends React.Component {
   constructor() {
     super();
@@ -48,7 +48,7 @@ export default class dispUser extends React.Component {
         <div >
           <div >
             <h3 className="titlediv">
-              Employee Management System
+              display data
             </h3>
             <InsertTest
               displayUsrDetails={this.displayUsrDetails}

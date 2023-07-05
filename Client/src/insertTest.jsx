@@ -1,12 +1,12 @@
+import React from 'react';
 export default class extends React.Component {
   onSubmit = async (e) => {
     e.preventDefault();
-    console.log("hi");
 
     const userData = {
       FirstName: 'Nithin',
       LastName: 'jose',
-      Phone:1234,
+      Phone: "1234",
       Email:'nin'
     };
 
@@ -34,6 +34,7 @@ export default class extends React.Component {
     const Udata = await graphQLFetch(query, {
       userData,
     });
+    console.log(Udata,"ull");
     if (Udata) {
       this.props.displayUsrDetails();
     }

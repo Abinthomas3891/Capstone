@@ -12,10 +12,22 @@
 // app.listen(PORT, function () {
 //   console.log("App started on port 6000");
 // });
-const express=require('express');
-const app=express();
-app.use(express.static('public'));
+// const express=require('express');
+// const app=express();
+// app.use(express.static('public'));
 
-app.listen(3001,()=>{
-    console.log("app started on 3001");
+// app.listen(3001,()=>{
+//     console.log("app started on 3001");
+// });
+
+import { ApolloClient, ApolloLink, InMemoryCache,createHttpLink } from "@apollo/client";
+//import { RestLink } from "apollo-link-rest";
+
+const httpLink = createHttpLink({
+  uri: "http://localhost:4500",
+});
+
+export const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: ApolloLink.from([httpLink]),
 });
