@@ -9,6 +9,8 @@ import Dashboard from './dashboard';
 import Profile from './profileDetails';
 import MyPosts from './userPosts';
 import Login from './login';
+import Blog from './blogpage';
+import BlogDetail from './blogdetail1';
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
       <Route path="/profileDetails" element={<Profile />} />
       <Route path="/userPosts" element={<MyPosts />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/blogpage" element={<Blog />} />
+      <Route path="/blogdetail1" element={<BlogDetail />} />
       
         
     </Routes>
