@@ -9,8 +9,7 @@ const enableCors = (process.env.ENABLE_CORS || "true") == "true";
 
 app.use(express.static("./public"));
 
-const typdef_graphql = ``;
-
+// Your resolvers
 const userDetails = async () => {
   return UserDB.find();
 };
@@ -53,44 +52,56 @@ const updatePost = async (_, { id, post }) => {
   return newPost;
 };
 
-// const employeeDelete = async (_, { id }) => {
-//   const empDelete = await EmployeeDB.findByIdAndDelete(id);
-//   return empDelete;
-// };
 
+
+// Updated resolver for queryByUserId
+const queryByUserId = async (_, { userId }) => {
+  try {
+    const posts = await PostDB.find({ createdBy: userId });
+    return posts;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error fetching posts by user ID');
+  }
+};
+// Define resolvers
 const resolvers = {
   Query: {
     userDetails: userDetails,
     getSingleUser: getSingleUser,
     postDetails: postDetails,
     getSinglePost: getSinglePost,
+    queryByUserId: queryByUserId, // Added queryByUserId resolver
   },
   Mutation: {
     addUserDetails: addUserDetails,
     addPostDetails: addPostDetails,
-    // employeeDelete: employeeDelete,
     updateUser: updateUser,
     updatePost: updatePost,
   },
 };
 
+// Read schema files
 const typeDefsUser = fs.readFileSync("./server/qlschema", "utf-8");
 const typeDefsPost = fs.readFileSync("./server/qlschemaPost", "utf-8");
 
+// Merge type definitions
 const mergedTypeDefs = gql`
-${typeDefsUser}
-${typeDefsPost}
+  ${typeDefsUser}
+  ${typeDefsPost}
 `;
 
+// Create Apollo Server instance
 const server = new ApolloServer({
   typeDefs: mergedTypeDefs,
   resolvers,
 });
 
-server.start().then((res) => {
+// Start server
+server.start().then(() => {
   mongoDB();
   server.applyMiddleware({ app, path: "/graphql" });
   app.listen(4500, () => {
-    console.log("http://localhost:4500" + server.graphqlPath);
+    console.log("Server is running on http://localhost:4500" + server.graphqlPath);
   });
 });

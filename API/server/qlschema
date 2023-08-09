@@ -1,15 +1,12 @@
 
 
 input User{
- 
-  id:String,
   FirstName: String
   LastName: String
   Phone: Int
   Email: String
 }
 type UserDetails{
- 
   id:String,
   FirstName: String
   LastName: String
@@ -22,7 +19,7 @@ type Query {
 }
 
 type Mutation {
-  addUserDetails(users: User!):UserDetails
+  addUserDetails(users: User !):UserDetails
   userDelete(id:String !): UserDetails
   updateUser(id: String!, user: User!): UserDetails
 } 

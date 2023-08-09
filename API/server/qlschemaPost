@@ -1,38 +1,61 @@
-
-
-input Post{
- 
-  Title:String,
-  Desc: String,
-  price: String,
-  Type: String,
-  Bed: String,
-  Bath: String,
-  parking: String,
-  Location:String,
-  image:String
-
+input PostInput {
+  Title: String
+  Desc: String
+  price: String
+  Type: String
+  Bed: String
+  Bath: String
+  parking: String
+  Location: String
+  image: String
 }
-type PostDetails{
- 
+
+type UserDetails{
   id:String,
-  Title:String,
-  Desc: String,
-  price: String,
-  Type: String,
-  Bed: String,
-  Bath: String,
-  parking: String,
-  Location:String,
-  image:String
+  FirstName: String
+  LastName: String
+  Phone: Int
+  Email: String
 }
+
+type Post {
+  id: String
+  Title: String
+  Desc: String
+  price: String
+  Type: String
+  Bed: String
+  Bath: String
+  parking: String
+  Location: String
+  image: String
+  createdBy: UserDetails
+  createdDate: String
+}
+
+type PostDetails {
+  id: String
+  Title: String
+  Desc: String
+  price: String
+  Type: String
+  Bed: String
+  Bath: String
+  parking: String
+  Location: String
+  image: String
+  createdBy: UserDetails  # createdBy should be of type User, not UserInput
+  createdDate: String
+}
+
 type Query {
   postDetails: [PostDetails!]!
-  getSinglePost(id:String): PostDetails
+  getSinglePost(id: String): PostDetails
+  queryByUserId(userId: String): [PostDetails!]!
 }
 
 type Mutation {
-  addPostDetails(posts: Post!):PostDetails
-  PostDelete(id:String !): PostDetails
-  updatePost(id: String!, post: Post!): PostDetails
-} 
+  addPostDetails(post: PostInput!): PostDetails
+  postDelete(id: String!): PostDetails
+  updatePost(id: String!, post: PostInput!): PostDetails
+}
