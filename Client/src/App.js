@@ -48,8 +48,8 @@ const App = () => {
               <Route path="/profileDetails" element={<Profile />} />
               <Route path="/userPosts" element={<MyPosts />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/blog" element={<Blogpage />} />
-              <Route path="/blogDet" element={<Blogdetail />} />
+              <Route path="/blogpage" element={<Blog />} />
+              <Route path="/blogdetail1" element={<BlogDetail />} />
             </Routes>
         </ApolloProvider>
      </AuthProvider>

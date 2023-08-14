@@ -27,7 +27,9 @@ const userHeader = () => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
+            <Nav.Link as={Link} to="/blogpage">Blog</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+      
             <Dropdown alignRight>
               <Dropdown.Toggle variant="link" id="user-dropdown">
                 <img src={user.profilePic} alt="Profile Pic" className="profile-pic" />
