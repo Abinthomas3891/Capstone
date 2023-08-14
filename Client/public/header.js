@@ -1,44 +1,36 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _react = _interopRequireDefault(require("react"));
-var _reactRouterDom = require("react-router-dom");
-var _reactBootstrap = require("react-bootstrap");
-require("./header.css");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-var Header = function Header() {
-  return /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Navbar, {
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
+import './assets/css/header.css';
+const Header = () => {
+  return /*#__PURE__*/React.createElement(Navbar, {
     className: "navbar-onthego sticky",
     expand: "lg"
-  }, /*#__PURE__*/_react["default"].createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "container"
-  }, /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Navbar.Brand, {
+  }, /*#__PURE__*/React.createElement(Navbar.Brand, {
     href: "/"
-  }, /*#__PURE__*/_react["default"].createElement("img", {
+  }, /*#__PURE__*/React.createElement("img", {
     src: "images/logo.png",
     alt: "Image 1"
-  })), /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Navbar.Toggle, {
+  })), /*#__PURE__*/React.createElement(Navbar.Toggle, {
     "aria-controls": "navbar-nav"
-  }), /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Navbar.Collapse, {
+  }), /*#__PURE__*/React.createElement(Navbar.Collapse, {
     id: "navbar-nav"
-  }, /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Nav, {
+  }, /*#__PURE__*/React.createElement(Nav, {
     className: "ml-auto"
-  }, /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Nav.Link, {
-    as: _reactRouterDom.Link,
+  }, /*#__PURE__*/React.createElement(Nav.Link, {
+    as: Link,
     to: "/"
-  }, "Home"), /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Nav.Link, {
-    as: _reactRouterDom.Link,
+  }, "Home"), /*#__PURE__*/React.createElement(Nav.Link, {
+    as: Link,
     to: "/about"
-  }, "About"), /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Nav.Link, {
-    as: _reactRouterDom.Link,
+  }, "About"), /*#__PURE__*/React.createElement(Nav.Link, {
+    as: Link,
     to: "/contact"
-  }, "Contact"), /*#__PURE__*/_react["default"].createElement(_reactBootstrap.Nav.Link, {
+  }, "Contact"), /*#__PURE__*/React.createElement(Nav.Link, {
     className: "btn-login btn",
-    href: "#"
+    href: "/login"
   }, "Login")))));
 };
-var _default = Header;
-exports["default"] = _default;
+export default Header;

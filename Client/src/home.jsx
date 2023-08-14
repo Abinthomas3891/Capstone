@@ -1,13 +1,61 @@
 import React, { useState } from 'react';
+import {useEffect} from 'react';
 import './assets/css/home.css';
 import { Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Image, Card} from 'react-bootstrap';
 import Header from "./header.jsx";
 import Footer from "./footer.jsx";
+import post1 from './assets/images/p1.jpg';
+import post2 from './assets/images/post4.jpg';
+import post3 from './assets/images/post2.jpg';
+import post4 from './assets/images/post3.jpg';
 
 const SearchBar = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    displayPostDetails();
+  }, []); 
+
+  
+  const displayPostDetails = async () => {
+    const query = `query postDetails {
+      postDetails {
+            Title
+            Desc
+            price
+            Type
+            Bed
+            Bath
+            parking
+            Location
+            image
+          }
+        }`;
+    const response = await fetch("http://localhost:4500/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query,
+      }),
+    });
+    const dataResult = await response.text();
+    // console.log(dataResult,"oll");
+    const responseData = JSON.parse(dataResult);
+  
+    if (responseData.errors) {
+      console.log("error");
+    } else {
+      setPost(responseData.data.postDetails);
+      console.log(responseData.data.postDetails,"posts");
+    }
+  };
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -43,6 +91,9 @@ const SearchBar = ({ onSearch }) => {
     setSearchQuery('');
     setLocation('');
   };
+  
+
+  
 
   return (
     <>
@@ -139,6 +190,26 @@ const SearchBar = ({ onSearch }) => {
         </Modal.Footer>
       </Modal>
       
+    </div>
+    <div className='container-fluid pt-5 bg-light pb-4'>
+      <Container>
+      {post.map((rental) => (
+        <Row className='card-view-home mb-3' key={rental._id}>
+          <Col md={4}>
+            <div className='pimg'>
+             <Card.Img variant="top" src={rental.image} />
+            </div>
+          </Col>
+          <Col md={8}>
+            <h3>{rental.Title}</h3>
+            <p className='location'>{rental.Location}</p>
+            <p className='description'>{rental.Desc}</p>
+            <h6>{rental.price}</h6>
+            <Link to="/postView" className='btn-login btn nav-link mt-3'>View Property</Link>
+          </Col>
+        </Row>
+      ))}
+      </Container>
     </div>
     <Footer />
     </>

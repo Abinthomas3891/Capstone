@@ -4,7 +4,9 @@ import React from 'react';
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import Header from "./userheader.jsx";
 import Footer from "./footer.jsx";
+import FileBase64 from 'react-file-base64';
 import './assets/css/style.css';
+import axios from 'axios';
 
 class PostCreation extends React.Component {
   onSubmit = async(event) => {
@@ -21,7 +23,7 @@ class PostCreation extends React.Component {
       Location:inputForm.location.value,
       image:inputForm.photos.value
     };
-
+    console.log("image",postData.image);
     await this.userDetInsert(postData);
 
   };
@@ -38,7 +40,7 @@ class PostCreation extends React.Component {
                         Bath: "${postData.Bath}",
                         parking: "${postData.parking}",
                         Location: "${postData.Location}",
-                        image: "${postData.image}"
+                        image: "imageurl"
                       
                       
               }) {
@@ -73,7 +75,7 @@ class PostCreation extends React.Component {
           }),
         });
         const res = await response.text();
-        const resResult = JSON.parse(res);
+        const resResult = JSON.parse(res); 
         console.log(resResult, "result");
         if (resResult.errors) {
           const resError = resResult.errors[0];
@@ -139,8 +141,7 @@ class PostCreation extends React.Component {
                 <Col md={6} className='contact-form'>
                 <FormGroup as={Col} className='mb-3' controlId="formGridState">
                   <FormLabel>Apartment Type</FormLabel>
-                  <FormControl name="PostType"></FormControl>
-                  <Form.Select defaultValue="Choose...">
+                  <Form.Select name="PostType" defaultValue="Choose...">
                     <option>Choose...</option>
                     <option>House</option>
                     <option>Town House</option>
@@ -154,7 +155,6 @@ class PostCreation extends React.Component {
                 <Col md={4} className='contact-form'>
                 <FormGroup className='mb-3'>
                   <FormLabel id="bed-label">Bedroom</FormLabel>
-                  <FormControl name="bed"></FormControl>
                   <div className='d-flex'>
                     <Form.Check
                       type="radio"
@@ -197,35 +197,34 @@ class PostCreation extends React.Component {
                 <Col md={4} className='contact-form'>
                     <FormGroup className='mb-3'>
                   <FormLabel id="bath-label">Bathroom</FormLabel>
-                  <FormControl name="bath"></FormControl>
                   <div className='d-flex'>
                     <Form.Check
                       type="radio"
                       id="bath-radio"
                       label="1"
                       value="1"
-                      name="bed"
+                      name="bath"
                     />
                      <Form.Check
                       type="radio"
                       id="radio"
                       label="1.5"
                       value="1.5"
-                      name="bed"
+                      name="bath"
                     />
                     <Form.Check
                       type="radio"
                       id="bathroom-radio"
                       label="2"
                       value="2"
-                      name="bed"
+                      name="bath"
                     />
                     <Form.Check
                       type="radio"
                       id="bedroom"
                       label="3"
                       value="3"
-                      name="bed"
+                      name="bath"
                     />
                     
                     </div>
@@ -234,21 +233,20 @@ class PostCreation extends React.Component {
                 <Col md={4} className='contact-form'>
                     <FormGroup className='mb-3'>
                   <FormLabel id="parking-label">Parking</FormLabel>
-                  <FormControl name="park"></FormControl>
                   <div className='d-flex'>
                     <Form.Check
                       type="radio"
                       id="parking-radio"
                       label="Yes"
                       value="Yes"
-                      name="parking"
+                      name="park"
                     />
                     <Form.Check
                       type="radio"
                       id="parking"
                       label="No"
                       value="No"
-                      name="parking"
+                      name="park"
                     />
                     </div>
                     </FormGroup>
@@ -269,9 +267,11 @@ class PostCreation extends React.Component {
                   <FormLabel id="location">Upload Images</FormLabel>
                     <FormControl
                       type="file"
+                      accept="image/*"
                       name="photos"
-
+                      
                     />
+                        
                   </FormGroup>
                   <FormGroup className='col-md-3 upload-product'>
                     <Button className='primary-btn btn' type="submit">Upload</Button>

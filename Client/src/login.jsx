@@ -1,17 +1,43 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState , useContext  } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Form, Button , Alert } from 'react-bootstrap';
 import Header from "./header.jsx";
 import Footer from "./footer.jsx";
 import './assets/css/style.css';
+import { AuthContext } from './AuthContext.jsx';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
+
+
+
+
+// Define the GraphQL mutation for the login
+
+
+const LOGIN_USER= gql`
+mutation(
+  $loginInput : loginInput
+){
+  loginUser(
+    loginInput: $loginInput
+  ){
+    username
+    email
+    Phone
+    token
+  }
+}
+`
+
 
 
 const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const context= useContext(AuthContext);
   const [errors, setErrors] = useState({});
+  const [dbErrror,setDbErrors]=useState([]); 
 
  
 
@@ -23,11 +49,30 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
+  const navigate = useNavigate();
+
+  const [ loginUser, {loading}] = useMutation(LOGIN_USER,
+    {
+      
+    update(proxy,{data: {loginUser: userData}}){
+      console.log('udata', userData);
+      context.login(userData)
+      navigate('/');
+      console.log('logged in');
+
+    },
+      onError({ graphQLErrors}){
+        setDbErrors(graphQLErrors);
+        console.log("eror",graphQLErrors);
+      }
+    })
   
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log("handle");
     // Validation
     const validationErrors = {};
    
@@ -44,11 +89,22 @@ const LoginPage = () => {
 
     if (Object.keys(validationErrors).length === 0) {
      
+      try{
+
+        const loginDt={
+          email:email,
+          Password:password
+        }
+
+        loginUser({ variables: { loginInput: loginDt } });
       
-      setEmail('');
-      setPassword('');
-      
+      }
+      catch(error){
+        console.log("catch")
+        console.log(error)
+      }
     }
+    
   };
 
   return (
@@ -85,6 +141,13 @@ const LoginPage = () => {
 
         <Button className='primary-btn btn' type="submit">Login</Button>
         <div className="login-link">
+        {dbErrror.map(function(error){
+            return(
+              <Alert severity="error">
+                {error.message}
+                </Alert>
+            );
+          })}
           <span>New User? </span>
           <Link to="/register">Register</Link>
         </div>

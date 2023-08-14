@@ -4,6 +4,7 @@ import Home from './home';
 import About from './aboutus';
 import DisplayUser from "./DisplayData"
 import { ApolloProvider } from '@apollo/client';
+import { AuthProvider } from './AuthContext';
 import { ApolloClient, ApolloLink, InMemoryCache,createHttpLink } from "@apollo/client";
 import PostCreation from "./postCreation.jsx";
 // import UserPosts from "./userPosts.jsx";
@@ -13,35 +14,45 @@ import Dashboard from './dashboard';
 import Profile from './profileDetails';
 import MyPosts from './userPosts';
 import Login from './login';
+import Blogpage from './blogpage';
+import Blogdetail from './blogdetail1' ;
+import client from './ApolloClient';
 import { Routes, Route } from 'react-router-dom';
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4500",
 });
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: ApolloLink.from([httpLink]),
-});
+
+
+
+// const client = new ApolloClient({
+//   cache: new InMemoryCache(),
+//   link: ApolloLink.from([httpLink]),
+// });
 
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contactus />} />
-      <Route path="/postCreation" element={<PostCreation />} />
-      {/* <Route path="/userPosts" element={<UserPosts />} />
-      <Route path="/profileDetails" element={<ProfileDetails />} /> */}
-      <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/profileDetails" element={<Profile />} />
-      <Route path="/userPosts" element={<MyPosts />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
-     </ApolloProvider>
+    <AuthProvider>
+        <ApolloProvider client={client}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contactus />} />
+              <Route path="/postCreation" element={<PostCreation />} />
+              {/* <Route path="/userPosts" element={<UserPosts />} />
+              <Route path="/profileDetails" element={<ProfileDetails />} /> */}
+              <Route path="/register" element={<Register />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profileDetails" element={<Profile />} />
+              <Route path="/userPosts" element={<MyPosts />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/blog" element={<Blogpage />} />
+              <Route path="/blogDet" element={<Blogdetail />} />
+            </Routes>
+        </ApolloProvider>
+     </AuthProvider>
   );
 };
 
