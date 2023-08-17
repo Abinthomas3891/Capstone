@@ -1,28 +1,43 @@
 
 
-input User{
+input Users{
  
   id:String,
-  FirstName: String
-  LastName: String
-  Phone: Int
-  Email: String
+  username: String
+  Phone: String
+  email: String
+  Password: String
 }
-type UserDetails{
+type User{
  
   id:String,
-  FirstName: String
-  LastName: String
-  Phone: Int
-  Email: String
+  username: String
+  Phone: String
+  email: String
+  Password: String
+  token: String
+}
+input registerInput{
+  username: String
+  email : String
+  Phone: String
+  Password: String
+}
+input loginInput{
+  email : String
+  Password: String
 }
 type Query {
-  userDetails: [UserDetails!]!
-  getSingleUser(id:String): UserDetails
+  userDetails: [User!]!
+  getSingleUser(id:ID!): User
+  
 }
 
 type Mutation {
-  addUserDetails(users: User!):UserDetails
-  userDelete(id:String !): UserDetails
-  updateUser(id: String!, user: User!): UserDetails
+  registerUser(registerInput:registerInput): User
+  
+  addUserDetails(users: Users!):User
+  userDelete(id:String !): User
+  updateUser(id: String!, user: Users!): User
+  loginUser(loginInput:loginInput): User
 } 

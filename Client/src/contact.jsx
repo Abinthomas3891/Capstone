@@ -2,16 +2,78 @@ import React from 'react';
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import Header from "./header.jsx";
 import Footer from "./footer.jsx";
+import emailjs from "emailjs-com";
 import './assets/css/style.css';
 
-
+//contactus page
 class Contactus extends React.Component {
-  onSubmit = (event) => {
-    event.preventDefault();
+  state = {
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    Status: '',
+    Message: '',
+    displayErrors: {},
+    
+  };
+  
+
+  contactformValidation = () => {
+    const { FirstName, LastName, Email, Status, Message } = this.state;
+    let displayErrors = {};
+
+    if (!FirstName) {
+      displayErrors.FirstName = 'First name is required';
+    }
+
+    if (!LastName) {
+      displayErrors.LastName = 'Last name is required';
+    }
+
+    if (!Email) {
+      displayErrors.Email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(Email)) {
+      displayErrors.Email = 'Email is invalid';
+    }
+
+    if (!Status) {
+      displayErrors.Status = 'Status is required';
+    }
+
+    if (!Message) {
+      displayErrors.Message = 'Message is required';
+    }
+
+    this.setState({ displayErrors });
+    return Object.keys(displayErrors).length === 0;
   };
 
-  render() {
-    return (
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+    
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+  
+  };
+  
+  sendEmail=(form)=>{
+
+    emailjs.sendForm('service_5dvacww', 'template_i1sul7n', form, 'bXQsgszPNKSNQh0ik')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      form.reset();
+    };
+
+  render() 
+  {
+    
+  const { displayErrors} = this.state;
+  return (
       <div>
         <Header />
         <div className='contact-banner'>
@@ -23,14 +85,16 @@ class Contactus extends React.Component {
           <Row className="justify-content-center">
             <Col md={8} className='contact-form'>
               <h3>Send us a message</h3>
-              <Form name="contact1" onSubmit={this.onSubmit}>
+              <Form name="contact1" onSubmit={(e) => { e.preventDefault(); this.sendEmail(e.target); }}>
                 <FormGroup>
                   {/* <FormLabel id="firstname">First name</FormLabel> */}
                   <FormControl
                     type="text"
                     name="FirstName"
                     placeholder="Enter your first name"
+                    onChange={this.handleChange}
                   />
+                  {displayErrors.FirstName && <span className="error">{displayErrors.FirstName}</span>}
                 </FormGroup>
                 <FormGroup>
                   {/* <FormLabel id="lastname">Last name</FormLabel> */}
@@ -38,7 +102,9 @@ class Contactus extends React.Component {
                     type="text"
                     name="LastName"
                     placeholder="Enter your last name"
+                    onChange={this.handleChange}
                   />
+                  {displayErrors.LastName && <span className="error">{displayErrors.LastName}</span>}
                 </FormGroup>
                 <FormGroup>
                   {/* <FormLabel id="email">Email</FormLabel> */}
@@ -46,7 +112,9 @@ class Contactus extends React.Component {
                     type="email"
                     name="Email"
                     placeholder="Enter your email address"
+                    onChange={this.handleChange}
                   />
+                  {displayErrors.Email && <span className="error">{displayErrors.Email}</span>}
                 </FormGroup>
                 <FormGroup>
                   <FormLabel id="status-label">Status</FormLabel>
@@ -57,6 +125,7 @@ class Contactus extends React.Component {
                       label="Sell"
                       value="Sell"
                       name="Status"
+                      onChange={this.handleChange}
                     />
                     <Form.Check
                       type="radio"
@@ -64,6 +133,7 @@ class Contactus extends React.Component {
                       label="Rent"
                       value="Rent"
                       name="Status"
+                      onChange={this.handleChange}
                     />
                     <Form.Check
                       type="radio"
@@ -71,8 +141,10 @@ class Contactus extends React.Component {
                       label="Other"
                       value="Other"
                       name="Status"
+                      onChange={this.handleChange}
                     />
                   </div>
+                  {displayErrors.Status && <span className="error">{displayErrors.Status}</span>}
                 </FormGroup>
                 <FormGroup>
                   {/* <FormLabel id="message">Message</FormLabel> */}
@@ -80,7 +152,9 @@ class Contactus extends React.Component {
                     as="textarea"
                     name="Message"
                     placeholder="Enter your message"
+                    onChange={this.handleChange}
                   />
+                  {displayErrors.Message && <span className="error">{displayErrors.Message}</span>}
                 </FormGroup>
                 <Button className='primary-btn btn' type="submit">Send a message</Button>
               </Form>
@@ -135,8 +209,8 @@ class Contactus extends React.Component {
         </div>
         <Footer />
       </div>
-    );
-  }
+      );
+} 
 }
 
 export default Contactus;

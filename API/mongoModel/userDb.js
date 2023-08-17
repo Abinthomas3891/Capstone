@@ -1,11 +1,11 @@
 const mongoose=require("mongoose");
 
 const userDB = mongoose.Schema({
-    FirstName: {type: String,},
-    LastName: {type: String,},
-    Phone: {type: Number},
-    Email: {type: String}
-
+    username: {type: String, default: null},
+    Phone: {type: String},
+    email: {type: String, unique: true},
+    Password: {type: String},
+    token: {type: String}
   });
   
   const UserDB = mongoose.model("userDB", userDB);

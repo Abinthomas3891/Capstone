@@ -29,10 +29,12 @@ type PostDetails{
 type Query {
   postDetails: [PostDetails!]!
   getSinglePost(id:String): PostDetails
+  getPostByNameAndLoc(Title:String,Location:String): PostDetails
 }
 
 type Mutation {
   addPostDetails(posts: Post!):PostDetails
   PostDelete(id:String !): PostDetails
   updatePost(id: String!, post: Post!): PostDetails
+  
 } 
