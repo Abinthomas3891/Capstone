@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./header.jsx";
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
-import './style.css';
+import './assets/css/style.css'
 import Footer from "./footer.jsx";
 
 class blogpage extends React.Component{
