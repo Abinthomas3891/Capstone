@@ -13,6 +13,8 @@ import Dashboard from "./dashboard.jsx";
 import Profile from "./profileDetails.jsx";
 import MyPosts from "./userPosts.jsx";
 import Login from "./login.jsx";
+import Blog from "./blogpage.jsx";
+import BlogDetail from "./blogdetail1.jsx";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 export default class App extends React.Component {
@@ -29,6 +31,8 @@ export default class App extends React.Component {
         <Route path="/profileDetails" element={<Profile />} />
         <Route path="/userPosts" element={<MyPosts />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/blogpage" element={<Blog />} />
+        <Route path="/blogdetail1" element={<BlogDetail />} />
         
         </Routes>
       </>

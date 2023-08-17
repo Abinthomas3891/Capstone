@@ -1,6 +1,5 @@
 import InsertTest from "./insertTest.jsx";
 import React from 'react';
-
 export default class dispUser extends React.Component {
   constructor() {
     super();

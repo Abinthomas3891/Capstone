@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt=require("bcryptjs");
 const cors = require('cors');
 const multer=require('multer');
-const router = express.Router();
 const enableCors = (process.env.ENABLE_CORS || "true") == "true";
 
 app.use(express.static("./public"));
@@ -36,8 +35,6 @@ const typdef_graphql = ``;
 // const userDetails = async () => {
 //   return UserDB.find();
 // };
-
-const typeDefsUser = fs.readFileSync("./server/qlschema", "utf-8");
 
 const postDetails = async () => {
   return PostDB.find();
@@ -101,9 +98,9 @@ const getPostByNameAndLoc = async (_, { Title, title, Location, location }) => {
 
 
 
-const getSingleUser = async (_, { id }) => {
-  return UserDB.findById(id);
-};
+// const getSingleUser = async (_, { id }) => {
+//   return UserDB.findById(id);
+// };
 
 const getSinglePost = async (_, { id }) => {
   return PostDB.findById(id);
@@ -258,15 +255,8 @@ const loginUser = async (_, { loginInput: { email, Password } }) => {
 
 const resolvers = {
   Query: {
-    userDetails: async () => {
-      try {
-        const users = await UserDB.find();
-        return users;
-      } catch (error) {
-        throw new ApolloError("Error while fetching user details: " + error.message);
-      }
-    },
-    getSingleUser: getSingleUser,
+    // userDetails: userDetails,
+    // getSingleUser: getSingleUser,
     postDetails: postDetails,
     getSinglePost: getSinglePost,
     // getPostByNameAndLoc :getPostByNameAndLoc,

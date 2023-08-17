@@ -50,7 +50,7 @@ body{
     font-size: 15px;
     font-weight: inherit;
     line-height: 26px;
-    margin: 0 0 16px;
+    margin: 0 0 0px;
     outline: 0;
     padding: 11px 17px;
     transition: color .2s ease-out,background-color .2s ease-out,border-color .2s ease-out;
@@ -122,7 +122,14 @@ textarea.form-control {
 .contact-form li {
     list-style: none;
 }
+span.error {
+    color: #ff3f3f;
+    font-size: 13px;
+}
 
+form > div {
+    margin-bottom: 1rem;
+}
 .contact-form li a,.contact-form li p  {
     color: #555;
     text-decoration: none;

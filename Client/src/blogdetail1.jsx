@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./header";
 import { Container, Row, Col, Card} from 'react-bootstrap';
 import './assets/css/style.css';
+import './style.css';
 import Footer from "./footer.jsx";
 
 

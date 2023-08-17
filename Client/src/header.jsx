@@ -26,6 +26,7 @@ const {user , logout} = useContext(AuthContext);
           <Nav className="ml-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
+            <Nav.Link as={Link} to="/blogpage">Blog</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
             
             { user?
