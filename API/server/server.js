@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt=require("bcryptjs");
 const cors = require('cors');
 const multer=require('multer');
-
 const enableCors = (process.env.ENABLE_CORS || "true") == "true";
 
 app.use(express.static("./public"));
@@ -275,7 +274,7 @@ const resolvers = {
   },
 };
 
-const typeDefsUser = fs.readFileSync("./server/qlschema", "utf-8");
+
 const typeDefsPost = fs.readFileSync("./server/qlschemaPost", "utf-8");
 
 const mergedTypeDefs = gql`
