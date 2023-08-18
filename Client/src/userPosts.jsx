@@ -7,16 +7,68 @@ import './assets/css/style.css';
 import post1 from './assets/images/post4.jpg';
 import post2 from './assets/images/post2.jpg';
 import post3 from './assets/images/post3.jpg';
+import { useEffect ,useContext,useState} from 'react';
+import { AuthContext } from './AuthContext.jsx';
 
 const Dashboard = () => {
   // Sample data for house rentals
-  const houseRentals = [
-    { id: 1, title: 'Cozy Apartment', location: 'City Center', price: '$1000', image: post1 },
-    { id: 2, title: 'Luxury Villa', location: 'Beachfront', price: '$3000', image: post2 },
-    { id: 3, title: 'Spacious House', location: 'Suburb', price: '$2000', image: post3 },
-  ];
+  const [rentals,setRental] = useState([]);
+  const user=useContext(AuthContext);
 
-  
+  const usff=useEffect(()=>{
+    getPostByUser(user.user.user_id);
+  },[]);
+
+
+
+  const getPostByUser = async (UserId) => {
+    const query = `
+  query GetPostByUser($UserId: String!) {
+    getPostByUser(UserId: $UserId) {
+      id
+      Title
+      UserId
+      Desc
+      price
+      Type
+      Bed
+      Bath
+      parking
+      Location
+      image
+    }
+  }
+`;
+
+
+const variables = { UserId: UserId };
+
+const response = await fetch("http://localhost:4500/graphql", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    query,
+    variables,
+  }),
+});
+
+    // console.log("user is - ",UserId);
+    // console.log("type - ",typeof(UserId));
+    const resdata = await response.json();
+
+    console.log("resdata ----",resdata);
+    if (resdata.errors) {
+      console.log(resdata.errors, "error");
+    } else {
+       console.log("success-working");
+       console.log(resdata.data.getPostByUser);
+       setRental(resdata.data.getPostByUser);
+       console.log("hi---",resdata.data);
+      
+    }
+  };
 
 
   return (
@@ -35,19 +87,21 @@ const Dashboard = () => {
               <i className="fas fa-plus"></i> Add Property
             </Link>
             <Row>
-              {houseRentals.map((rental) => (
+             
+              {rentals.map((rental) => (
                 <Col key={rental.id} md={4} sm={4} className='pb-4'>
                   <Card>
-                    <Card.Img variant="top" src={rental.image} />
+                    <Card.Img variant="top" src={`data:image/jpeg;base64,${rental.image}`} />
                     <Card.Body>
-                      <Card.Title>{rental.title}</Card.Title>
-                      <Card.Text>{rental.location}</Card.Text>
+                      <Card.Title>{rental.Title}</Card.Title>
+                      <Card.Text>{rental.Location}</Card.Text>
                       <Card.Text>{rental.price}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
               ))}
             </Row>
+              
           </div>
 
          

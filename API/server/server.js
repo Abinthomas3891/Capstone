@@ -77,19 +77,18 @@ const postDetails = async () => {
   
 // }
 
-const getPostByNameAndLoc = async (_, { Title, title, Location, location }) => {
+const getPostByUser = async (_, { UserId }) => {
   try {
 
     const posts = await PostDB.find({
-      $and: [
-        { [Title]: title },
-        { [Location]: location },
-      ],
+      UserId: UserId,
     });
 
     if (posts.length === 0) {
-      throw new Error('No posts found with the specified criteria');
+      console.log("no posts");
+      throw new Error('No posts found for the user');
     }
+    console.log(posts,"post data");
     return posts;
   } catch (error) {
     throw new Error('Error while fetching users: ' + error.message);
@@ -105,6 +104,9 @@ const getPostByNameAndLoc = async (_, { Title, title, Location, location }) => {
 
 const getSinglePost = async (_, { id }) => {
   return PostDB.findById(id);
+};
+const getSingleUser = async (_, { id }) => {
+  return UserDB.findById(id);
 };
 
 // const addUserDetails = async (_, { users }) => {
@@ -257,10 +259,10 @@ const loginUser = async (_, { loginInput: { email, Password } }) => {
 const resolvers = {
   Query: {
     // userDetails: userDetails,
-    // getSingleUser: getSingleUser,
+    getSingleUser: getSingleUser,
     postDetails: postDetails,
     getSinglePost: getSinglePost,
-    // getPostByNameAndLoc :getPostByNameAndLoc,
+    getPostByUser : getPostByUser,
   },
   Mutation: {
     // addUserDetails: addUserDetails,

@@ -14,9 +14,10 @@ import Dashboard from './dashboard';
 import Profile from './profileDetails';
 import MyPosts from './userPosts';
 import Login from './login';
-import Blogpage from './blogpage';
-import Blogdetail from './blogdetail1' ;
+import Blog from './blogpage';
+import BlogDetail from './blogdetail1' ;
 import client from './ApolloClient';
+import PostView from "./postView.jsx";
 import { Routes, Route } from 'react-router-dom';
 
 const httpLink = createHttpLink({
@@ -48,6 +49,7 @@ const App = () => {
               <Route path="/profileDetails" element={<Profile />} />
               <Route path="/userPosts" element={<MyPosts />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/postView/:rentalId" element={<PostView />} />
               <Route path="/blogpage" element={<Blog />} />
               <Route path="/blogdetail1" element={<BlogDetail />} />
             </Routes>

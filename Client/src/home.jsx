@@ -10,12 +10,15 @@ import post1 from './assets/images/p1.jpg';
 import post2 from './assets/images/post4.jpg';
 import post3 from './assets/images/post2.jpg';
 import post4 from './assets/images/post3.jpg';
+import { useHistory } from 'react-router-dom';
 
 const SearchBar = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [post, setPost] = useState([]);
+  
+  
 
   useEffect(() => {
     displayPostDetails();
@@ -25,6 +28,7 @@ const SearchBar = ({ onSearch }) => {
   const displayPostDetails = async () => {
     const query = `query postDetails {
       postDetails {
+            id
             Title
             Desc
             price
@@ -194,18 +198,22 @@ const SearchBar = ({ onSearch }) => {
     <div className='container-fluid pt-5 bg-light pb-4'>
       <Container>
       {post.map((rental) => (
-        <Row className='card-view-home mb-3' key={rental._id}>
+        
+        <Row className='card-view-home mb-3' key={rental.id}>
           <Col md={4}>
             <div className='pimg'>
-             <Card.Img variant="top" src={rental.image} />
+             <Card.Img variant="top" src={`data:image/jpeg;base64,${rental.image}`} />
             </div>
           </Col>
           <Col md={8}>
             <h3>{rental.Title}</h3>
+            {/* <h3>{rental}</h3> */}
             <p className='location'>{rental.Location}</p>
             <p className='description'>{rental.Desc}</p>
             <h6>{rental.price}</h6>
-            <Link to="/postView" className='btn-login btn nav-link mt-3'>View Property</Link>
+            
+            <Link to={`/postView/${rental.id}`} className='btn-login btn nav-link mt-3'>View Property</Link>
+            
           </Col>
         </Row>
       ))}

@@ -2,9 +2,10 @@ import React from 'react';
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import Header from "./header.jsx";
 import Footer from "./footer.jsx";
+import emailjs from "emailjs-com";
 import './assets/css/style.css';
 
-
+//contactus page
 class Contactus extends React.Component {
   state = {
     FirstName: '',
@@ -12,8 +13,10 @@ class Contactus extends React.Component {
     Email: '',
     Status: '',
     Message: '',
-    displayErrors: {}
+    displayErrors: {},
+    
   };
+  
 
   contactformValidation = () => {
     const { FirstName, LastName, Email, Status, Message } = this.state;
@@ -47,19 +50,28 @@ class Contactus extends React.Component {
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+    
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-
-    if (this.contactformValidation()) {
-      console.log('Submitted successfully');
-    }
+  
   };
   
+  sendEmail=(form)=>{
+
+    emailjs.sendForm('service_5dvacww', 'template_i1sul7n', form, 'bXQsgszPNKSNQh0ik')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      form.reset();
+    };
 
   render() 
   {
+    
   const { displayErrors} = this.state;
   return (
       <div>
@@ -73,7 +85,7 @@ class Contactus extends React.Component {
           <Row className="justify-content-center">
             <Col md={8} className='contact-form'>
               <h3>Send us a message</h3>
-              <Form name="contact1" onSubmit={this.handleSubmit}>
+              <Form name="contact1" onSubmit={(e) => { e.preventDefault(); this.sendEmail(e.target); }}>
                 <FormGroup>
                   {/* <FormLabel id="firstname">First name</FormLabel> */}
                   <FormControl

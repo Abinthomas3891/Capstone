@@ -29,7 +29,7 @@ input loginInput{
 }
 type Query {
   userDetails: [User!]!
-  getSingleUser(id:ID!): User
+  getSingleUser(id:String!): User
   
 }
 

@@ -2,6 +2,7 @@ const mongoose=require("mongoose");
 
 const postsDB = mongoose.Schema({
     Title: {type: String},
+    UserId: {type:String},
     Desc: {type: String},
     price:{type: String},
     Type: {type: String},

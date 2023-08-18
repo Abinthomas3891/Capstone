@@ -1,8 +1,8 @@
 
 
 input Post{
- 
   Title:String,
+  UserId:String,
   Desc: String,
   price: String,
   Type: String,
@@ -13,10 +13,11 @@ input Post{
   image:String
 
 }
+
 type PostDetails{
- 
   id:String,
   Title:String,
+  UserId:String,
   Desc: String,
   price: String,
   Type: String,
@@ -29,7 +30,7 @@ type PostDetails{
 type Query {
   postDetails: [PostDetails!]!
   getSinglePost(id:String): PostDetails
-  getPostByNameAndLoc(Title:String,Location:String): PostDetails
+  getPostByUser(UserId:String!): [PostDetails]
 }
 
 type Mutation {

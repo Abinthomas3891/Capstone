@@ -4,28 +4,78 @@ import React from 'react';
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import Header from "./userheader.jsx";
 import Footer from "./footer.jsx";
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
 import FileBase64 from 'react-file-base64';
 import './assets/css/style.css';
 import axios from 'axios';
 
+
 class PostCreation extends React.Component {
-  onSubmit = async(event) => {
+
+  static contextType = AuthContext; 
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedFile: null,
+      base64Data: '',
+      fileUrl: ''
+    };
+  }
+
+  handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Content = e.target.result.split(',')[1];
+        this.setState({ base64Data: base64Content });
+
+        const blob = this.base64ToBlob(base64Content);
+        const url = URL.createObjectURL(blob);
+        this.setState({ fileUrl: url });
+      };
+      reader.readAsDataURL(file);
+      this.setState({ selectedFile: file });
+    }
+  };
+
+  base64ToBlob = (base64String) => {
+    const byteCharacters = atob(base64String);
+    const byteArrays = [];
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteArrays.push(byteCharacters.charCodeAt(i));
+    }
+
+    return new Blob([new Uint8Array(byteArrays)]);
+  };
+
+
+  onSubmit = async (event) => {
     event.preventDefault();
-    const inputForm = document.forms.ad;
+    const {user , logout} = this.context;
+    
+    console.log(user);
+
+    const inputForm = event.target;
     const postData = {
-      Title:inputForm.PostTitle.value,
+      Title: inputForm.PostTitle.value,
+      UserId:user.user_id,
       Desc: inputForm.PostDescription.value,
       price: inputForm.Price.value,
       Type: inputForm.PostType.value,
       Bed: inputForm.bed.value,
       Bath: inputForm.bath.value,
       parking: inputForm.park.value,
-      Location:inputForm.location.value,
-      image:inputForm.photos.value
+      Location: inputForm.location.value,
+      image: this.state.base64Data, // Use this.state to access the base64Data
     };
-    console.log("image",postData.image);
-    await this.userDetInsert(postData);
 
+    console.log("image", postData.image);
+    await this.userDetInsert(postData);
   };
 
   userDetInsert = async (postData) => {
@@ -33,6 +83,7 @@ class PostCreation extends React.Component {
                 addPostDetails(posts:{
 
                         Title: "${postData.Title}",
+                        UserId:"${postData.UserId}",
                         Desc: "${postData.Desc}",
                         price: "${postData.price}",
                         Type: "${postData.Type}",
@@ -40,12 +91,13 @@ class PostCreation extends React.Component {
                         Bath: "${postData.Bath}",
                         parking: "${postData.parking}",
                         Location: "${postData.Location}",
-                        image: "imageurl"
+                        image: "${postData.image}"
                       
                       
               }) {
                 
                 Title
+                UserId
                 Desc
                 price
                 Type
@@ -265,12 +317,22 @@ class PostCreation extends React.Component {
                 <Row className='mb-3'>
                   <FormGroup className='col-md-9'>
                   <FormLabel id="location">Upload Images</FormLabel>
-                    <FormControl
+                  <Form.Control type="file" onChange={this.handleFileInputChange} />
+
+                  {this.state.fileUrl && (
+                    <div>
+                      <a href={this.state.fileUrl} download={this.state.selectedFile.name}>
+                        Download File
+                      </a>
+                    </div>
+                  )}
+
+                    {/* <FormControl
                       type="file"
                       accept="image/*"
                       name="photos"
                       
-                    />
+                    /> */}
                         
                   </FormGroup>
                   <FormGroup className='col-md-3 upload-product'>
@@ -284,16 +346,7 @@ class PostCreation extends React.Component {
                 </Col>
           </Row>
               </Form>
-
-
-
-
-            
           </div>
-          
-
-         
-
         </Container>
       </div>
       <Footer />

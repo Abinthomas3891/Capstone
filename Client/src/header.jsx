@@ -2,14 +2,16 @@ import React from 'react';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import './assets/css/header.css';
+import userpic from './assets/images/user.png';
 
 
 
 const Header = () => {
 let navigate= useNavigate();
 const {user , logout} = useContext(AuthContext);
+console.log("user ----",user)
   const onLogout =()=>{
     logout();
     navigate('/');
@@ -31,7 +33,19 @@ const {user , logout} = useContext(AuthContext);
             
             { user?
             <>
-            
+                <Dropdown alignRight>
+              <Dropdown.Toggle variant="link" id="user-dropdown">
+                <img src={userpic} alt="Profile Pic" className="profile-pic" />
+                {user.email}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="/profileDetails">Profile</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item as={Link} to="/postCreation">Add Property</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item as={Link} to="/dashboard">Dashboard</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
             <Nav.Link className="btn-login btn" onClick={onLogout}>
                   Logout
                 </Nav.Link>
